@@ -1,0 +1,10 @@
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:kill:*'   force-list always
+zstyle ":completion:*:descriptions" format "%B%d%b"
+zstyle ':completion:*:*:*:default' menu yes select search
+
+bindkey -M menuselect '^F' history-incremental-search-forward
+bindkey -M menuselect '^R' history-incremental-search-backward
+bindkey -M menuselect ' ' 'accept-line ; accept-line'
+
+# vim:ft=zsh

@@ -1,0 +1,32 @@
+function probe_host {
+    while [ 1 ]; do
+        nmap --max_rtt_timeout 500ms --host_timeout 500ms -sP $1 | grep -i "1 host up" > /dev/null
+        if (( ! $? )); then
+            echo $fg_bold[green]UP$reset_color;
+        else
+            echo $fg_bold[yellow]DOWN$reset_color;
+        fi
+        sleep 1
+    done
+}
+
+function run_diso {
+  sh -c "$@" &
+  disown
+}
+
+function pbcopydir {
+  pwd | tr -d "\r\n" | pbcopy
+}
+
+from-where() {
+    echo $^fpath/$_comps[$1](N.)
+    whence -v $_comps[$1]
+    #which $_comps[$1] 2>&1 | head
+}
+
+uncolor() {
+    perl -pe 's/\e\[?.*?[\@-~]//g'
+}
+
+# vim:ft=zsh

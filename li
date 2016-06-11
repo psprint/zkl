@@ -1,0 +1,35 @@
+source '/Users/sgniazdowski/.zplugin/bin/zplugin.zsh'
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
+
+autoload -Uz compinit
+compinit
+
+zplugin snippet https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
+zplugin snippet https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/git.zsh
+zplugin cdclear -q
+
+zplugin load psprint zsh-navigation-tools
+zplugin load psprint zsh-editing-workbench
+zplugin load psprint zsh-cmd-architect
+zplugin load psprint zsnapshot
+zplugin load psprint ztrace
+zplugin load psprint zsh-select
+zplugin load psprint zsh-morpho
+zplugin load psprint zprompts
+zplugin load psprint zzcomplete
+#zplugin load psprint zekyll
+#zplugin load psprint history-search-multi-word
+#zplugin load willghatch/zsh-snippets
+#zplugin load zsh-users/zaw
+zplugin load zsh-users zsh-autosuggestions
+ZSH_HIGHLIGHT_THEME=error-only
+zplugin load zsh-users/zsh-syntax-highlighting
+
+#zplugin load nojhan/liquidprompt
+#zplugin load NicoSantangelo/Alpharized
+#zplugin load russjohnson/angry-fly-zsh
+
+zplugin cdreplay
+
+# vim:ft=zsh

@@ -1,0 +1,31 @@
+autoload -Uz allopt
+autoload -Uz zed
+autoload -Uz colors
+colors
+autoload -Uz zmv
+autoload -Uz zcalc
+zmodload -i zsh/complist
+
+autoload -U insert-files
+zle -N insert-files
+bindkey "^Xi" insert-files
+
+autoload -Uz tetris
+zle -N tetris
+bindkey "^Xt" tetris
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
+autoload -Uz select-word-style
+select-word-style shell
+
+autoload -Uz url-quote-magic  
+zle -N self-insert url-quote-magic
+
+url_quote_commands=(links wget youtube-dl)
+zstyle -e :urlglobber url-other-schema \
+  '[[ $url_quote_commands[(i)$words[1]] -le ${#url_quote_commands} ]] && reply=("*") || reply=(http https ftp ssh)'
+
+# vim:ft=zsh

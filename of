@@ -1,0 +1,94 @@
+function asus_xauth {
+    local i
+
+    for i in 0 1; do
+        echo 'mac:'$i..
+        xauth nextract - 'mac:'$i | ssh root@asus xauth nmerge -
+        xauth nextract - 'mac:'$i | ssh seba@asus xauth nmerge -
+    done
+}
+
+function gericom_xauth {
+    local i
+
+    for i in 0 1; do
+        echo 'mac:'$i..
+        xauth nextract - 'mac:'$i | ssh root@geri xauth nmerge -
+    done
+}
+
+function is_macports {
+    echo "$PATH" | grep -q "/opt/local/bin"
+}
+
+function prompt_macports {
+    is_macports && echo "/MacPorts"
+}
+
+function macports_on {
+    macports_off
+    PATH=/opt/local/bin:$PATH
+    typeset -U path
+    export PATH
+}
+
+function macports_off {
+    PATH=${PATH//\/opt\/local\/bin/}
+    PATH=${PATH//\/opt\/local\/bin:/}
+    PATH=${PATH//:\/opt\/local\/bin/}
+
+    PATH=${PATH//\/opt\/local\/bin\//}
+    PATH=${PATH//:\/opt\/local\/bin\//}
+    PATH=${PATH//\/opt\/local\/bin\/:/}
+
+    typeset -U path
+    export PATH
+}
+
+function brew_on {
+    PATH=${PATH//\/usr\/local\/bin/}
+    PATH=${PATH//\/usr\/local\/bin:/}
+    PATH=${PATH//:\/usr\/local\/bin/}
+
+    PATH=${PATH//\/usr\/local\/bin\//}
+    PATH=${PATH//:\/usr\/local\/bin\//}
+    PATH=${PATH//\/usr\/local\/bin\/:/}
+
+    PATH=${PATH//\/usr\/local\/sbin/}
+    PATH=${PATH//\/usr\/local\/sbin:/}
+    PATH=${PATH//:\/usr\/local\/sbin/}
+
+    PATH=${PATH//\/usr\/local\/sbin\//}
+    PATH=${PATH//:\/usr\/local\/sbin\//}
+    PATH=${PATH//\/usr\/local\/sbin\/:/}
+
+    PATH=$PATH:/usr/local/bin:/usr/local/sbin
+    typeset -U path
+    export PATH
+}
+
+function brew_off {
+    PATH=${PATH//\/usr\/local\/bin/}
+    PATH=${PATH//\/usr\/local\/bin:/}
+    PATH=${PATH//:\/usr\/local\/bin/}
+
+    PATH=${PATH//\/usr\/local\/bin\//}
+    PATH=${PATH//:\/usr\/local\/bin\//}
+    PATH=${PATH//\/usr\/local\/bin\/:/}
+
+    PATH=${PATH//\/usr\/bin/\/usr\/bin:\/usr\/local\/bin}
+    typeset -U path
+    export PATH
+}
+
+function relozsh {
+        autoload -U zrecompile
+                [ -f ~/.zshrc ] && zrecompile -p ~/.zshrc
+                [ -f ~/.zcompdump ] && zrecompile -p ~/.zcompdump
+                [ -f ~/.zcompdump ] && zrecompile -p ~/.zcompdump
+                [ -f ~/.zshrc.zwc.old ] && rm -f ~/.zshrc.zwc.old
+                [ -f ~/.zcompdump.zwc.old ] && rm -f ~/.zcompdump.zwc.old
+                source ~/.zshrc
+}
+
+# vim:ft=zsh

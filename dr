@@ -1,0 +1,30 @@
+if [[ $ZSH_VERSION > 3.0.6 ]]; then
+    setopt C_BASES		# print hex numbers like 0x7F
+    setopt LIST_PACKED		# use variable width columns for completion options
+    setopt OCTAL_ZEROES         # print octal numbers like 037
+fi
+
+setopt APPEND_HISTORY
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt COMPLETE_IN_WORD
+setopt HIST_IGNORE_DUPS
+setopt INC_APPEND_HISTORY
+setopt INTERACTIVE_COMMENTS
+setopt NOTIFY
+setopt NO_ALWAYS_TO_END
+setopt NO_AUTO_MENU
+setopt NO_GLOB_COMPLETE
+setopt NO_GLOB_DOTS
+setopt NO_HIST_NO_FUNCTIONS
+setopt NO_PROMPT_CR
+setopt NO_SHARE_HISTORY
+setopt NUMERIC_GLOB_SORT
+setopt PROMPTSUBST
+setopt PUSHD_IGNORE_DUPS
+#setopt IGNORE_EOF
+#setopt NO_SHORT_LOOPS
+#setopt PRINT_EXIT_VALUE
+#setopt RM_STAR_WAIT
+
+# vim:ft=zsh

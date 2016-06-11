@@ -1,0 +1,29 @@
+# EXPORT
+HISTSIZE=89000
+SAVEHIST=89000
+HISTFILE=~/.zhistory
+
+(( ABSD )) && {
+    export LSCOLORS=dxfxcxdxbxegedabagacad CLICOLOR="1" 
+    export ANDROID_ROOT=/opt/android
+}
+
+if [ -x /usr/bin/dircolors ]; then
+    DIRCPATH="/usr/bin/dircolors"
+elif [ -x /usr/local/bin/dircolors ]; then
+    DIRCPATH="/usr/local/bin/dircolors"
+else
+    DIRCPATH="/usr/bin/false"
+fi
+
+if [ -f /etc/DIR_COLORS ]; then
+    eval `$DIRCPATH -b /etc/DIR_COLORS`
+else
+    eval `$DIRCPATH`
+fi
+
+export EDITOR="vim" LESS="-iRFX" CVS_RSH="ssh"
+
+umask 022
+
+# vim:ft=zsh

@@ -1,0 +1,13 @@
+alias2() {
+    builtin alias "$@"
+    return $?
+    [ "$GLOBAL_VAR" -lt "3" ] && echo "My own alias [$GLOBAL_VAR] $@"
+    (( GLOBAL_VAR ++ ))
+    builtin alias "$@"
+}
+
+zle2() {
+    builtin zle "$@"
+}
+
+# vim:ft=zsh
