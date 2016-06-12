@@ -3,3 +3,5 @@ prompt sprint3
 brew_on
 [ -f "$HOME/Safe/brew-api-token" ] && export HOMEBREW_GITHUB_API_TOKEN=$(<~/Safe/brew-api-token)
 cdpath=( "$HOME/github" )
+
+path+=( "/Users/sgniazdowski/.zekyll/zekyll" )
