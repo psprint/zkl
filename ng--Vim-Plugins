@@ -1,3 +1,20 @@
+"
+" Justify Macro
+"
+runtime macros/justify.vim
+
+"
+" Settings of plugins
+"
+let g:explDetailedList=1
+let g:explDateFormat="%m %d %Y %H:%M"
+let g:manpageview_winopen="reuse"
+let g:html_use_css=1
+let g:use_xhtml=1
+let c_no_comment_fold=1
+let c_gnu=1
+let c_no_if0_fold=1
+
 " Run a given vim command on the results of fuzzy selecting from a given shell
 " command. See usage below.
 function! ZshSelectCommand(choice_command, zshselect_args, vim_command)

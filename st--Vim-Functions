@@ -1,3 +1,15 @@
+"
+" MyFoldText
+"
+function! MyFoldText()
+    let comment = substitute(getline(v:foldstart),"^[[:space:]]*","",1)
+    let comment = substitute(comment,"{{"."{.*$","",1)
+    let comment = substitute(comment,"\"[[:space:]]*","",1)
+    let txt = '+ ' . comment
+    return txt
+endfunction
+
+set foldtext=MyFoldText()
 " function! SG_WriteBackup {{{1
 nnoremap <Leader>'b :call SG_WriteBackup()<CR>
 function! SG_WriteBackup()

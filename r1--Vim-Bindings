@@ -1,41 +1,21 @@
-" SET FOLDTEXT {{{1
-function! MyFoldText()
-    let comment = substitute(getline(v:foldstart),"^[[:space:]]*","",1)
-    let comment = substitute(comment,"{{"."{.*$","",1)
-    let comment = substitute(comment,"\"[[:space:]]*","",1)
-    let txt = '+ ' . comment
-    return txt
-endfunction
-set foldtext=MyFoldText()
-" 1}}}
-" F1-F12 {{{1
-nnoremap    <F12>   :make<CR>
-inoremap    <F12>   <C-O>:make<CR>
-nnoremap    <F11>   :cnext<CR>
-inoremap    <F11>   <C-O>:cnext<CR>
+"
+" F1-F12
+"
+nnoremap    <F12>    :make<CR>
+inoremap    <F12>    <C-O>:make<CR>
+nnoremap    <F11>    :cnext<CR>
+inoremap    <F11>    <C-O>:cnext<CR>
 nnoremap    <silent> <F8> :call SG_ToggleMouse()<CR>
 inoremap    <silent> <F8> <C-O>:call SG_ToggleMouse()<CR>
 set pastetoggle=<F7>
-nmap        <F4>    a<C-R>=strftime("%Y-%m-%d %a %H:%M")<CR><Esc>
-imap        <F4>    <C-R>=strftime("%Y-%m-%d %a %H:%M")<CR>
-nnoremap    <F3>    <C-W><C-S>:Ex<CR>
-inoremap    <F3>    <ESC><C-W><C-S>:Ex<CR>
-nnoremap    <F2>    <C-W>w
-inoremap    <F2>    <ESC><C-W>w
-nnoremap    <F1>    :hide<CR>
-inoremap    <F1>    <ESC>:hide<CR>
-" 1}}}
-
-runtime macros/justify.vim
-
-let g:explDetailedList=1
-let g:explDateFormat="%m %d %Y %H:%M"
-let g:manpageview_winopen="reuse"
-let g:html_use_css=1
-let g:use_xhtml=1
-let c_no_comment_fold=1
-let c_gnu=1
-let c_no_if0_fold=1
+nmap        <F4>     a<C-R>=strftime("%Y-%m-%d %a %H:%M")<CR><Esc>
+imap        <F4>     <C-R>=strftime("%Y-%m-%d %a %H:%M")<CR>
+nnoremap    <F3>     <C-W><C-S>:Ex<CR>
+inoremap    <F3>     <ESC><C-W><C-S>:Ex<CR>
+nnoremap    <F2>     <C-W>w
+inoremap    <F2>     <ESC><C-W>w
+nnoremap    <F1>     :hide<CR>
+inoremap    <F1>     <ESC>:hide<CR>
 
 " vim7 tabs
 if version >= 700
