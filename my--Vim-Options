@@ -1,3 +1,9 @@
+if exists("*mkdir")
+    if !isdirectory($HOME."/tmp/vitmp")
+        silent! call mkdir($HOME."/tmp/vitmp", "p", 0700)
+    endif
+endif
+
 " OPTIONS {{{1
 if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
    "set fileencodings=utf-8,latin2,latin1
