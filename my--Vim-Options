@@ -1,0 +1,38 @@
+" OPTIONS {{{1
+if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
+   "set fileencodings=utf-8,latin2,latin1
+endif
+
+set nocompatible
+set modeline
+set modelines=2
+" Format
+set ts=8
+set sts=4
+set sw=4
+set et
+" File
+set backup
+set backupdir=/Users/sgniazdowski/Safe/vitmp,~/tmp/vitmp
+set viminfo='50,\"2000			" 2000 register lines 
+set history=500
+set printoptions=left:15mm,right:15mm,top:15mm,bottom:20mm,syntax:y,paper:A4
+" Display
+set ruler				" show cursor position
+set listchars+=precedes:<,extends:>	" screen boundary marks when nowrap
+" Behavior
+set sidescroll=1			" horizontal scroll lines
+set noignorecase
+set bs=2				" backspace moves across all boundaries
+set nowrap
+set foldmethod=marker
+set swb=usetab				" switching buffers includes those in tabs
+" Function
+set mouse=""
+set hidden				" unmodified buffors aren't wiped
+set autowrite
+set autowriteall			
+set isfname-==				" "ctrl-x f" after variable assignment
+set timeoutlen=800 ttimeoutlen=-1
+" 1}}}
+" vim:ft=vim

@@ -1,0 +1,147 @@
+" function! SG_WriteBackup {{{1
+nnoremap <Leader>'b :call SG_WriteBackup()<CR>
+function! SG_WriteBackup()
+    let fname   = expand("%:t") . "__" . strftime("%m_%d_%Y_%H.%M.%S")
+    let dirname = strftime("%m_%Y")
+    " TODO call mkdir()
+    silent call system("mkdir -p /Users/sgniazdowski/Safe/master_backup/" . dirname)
+    silent exe ":w /Users/sgniazdowski/Safe/master_backup/" . dirname . "/" . fname
+    echo "Wrote " . dirname . "/" . fname
+endfun
+" 1}}}
+function! SG_NoUTFPolishLeters() " {{{1
+    :%s/Ä/A/ge
+    :%s/Ä/a/ge
+    :%s/Ä/C/ge
+    :%s/Ä/c/ge
+    :%s/Ä/E/ge
+    :%s/Ä/e/ge
+    :%s/Å/L/ge
+    :%s/Å/l/ge
+    :%s/Å/N/ge
+    :%s/Å/n/ge
+    :%s/Ã/O/ge
+    :%s/Ã³/o/ge
+    :%s/Å/S/ge
+    :%s/Å/s/ge
+    :%s/Å¹/Z/ge
+    :%s/Åº/z/ge
+    :%s/Å»/Z/ge
+    :%s/Å¼/z/ge
+endfunction " 1}}}
+function! SG_NoISOPolishLeters() " {{{1
+    :%s/¡/A/ge
+    :%s/±/a/ge
+    :%s/Æ/C/ge
+    :%s/æ/c/ge
+    :%s/Ê/E/ge
+    :%s/ê/e/ge
+    :%s/£/L/ge
+    :%s/³/l/ge
+    :%s/Ñ/N/ge
+    :%s/ñ/n/ge
+    :%s/Ó/O/ge
+    :%s/ó/o/ge
+    :%s/¦/S/ge
+    :%s/¶/s/ge
+    :%s/¬/Z/ge
+    :%s/¼/z/ge
+    :%s/¯/Z/ge
+    :%s/¿/z/ge
+endfunction " 1}}}
+function! SG_off_FixUtf8() " {{{1
+    " e,
+    :%s/Ä/e/ge
+    " \l
+    :%s/Å/l/ge
+    " \L
+    :%s/Å/L/ge
+    " o'
+    :%s/Ã³/o/ge
+    "z' (rz)
+    :%s/Å¼/z/ge
+    " s'
+    :%s/Å/s/ge
+    " c'
+    :%s/Ä/c/ge
+    " a,
+    :%s/Ä/a/ge
+    "
+    :%s///ge
+    "
+    :%s///ge
+    "
+    :%s///ge
+    "
+    :%s///ge
+    "
+    :%s///ge
+endfunction " 1}}}
+function SG_ToggleMouse() " {{{1
+    if &mouse=='a'
+        set mouse=
+        echo "Mouse off"
+    else
+        set mouse=a
+        echo "Mouse on"
+    endif
+endfunction " 1}}}
+function! SG_FixPascalCode() " {{{1
+    :%s/\<function\>/Function/gie
+    :%s/\<begin\>/Begin/gie
+    :%s/\<program\>/Program/gie
+    :%s/\<procedure\>/Procedure/gie
+    :%s/\<end\>/End/gie
+    :%s/\<while\>/While/gie
+    :%s/\<case\>/Case/gie
+    :%s/\<false\>/False/gie
+    :%s/\<integer\>/Integer/gie
+    :%s/\<array\>/Array/gie
+    :%s/\<boolean\>/Boolean/gie
+    :%s/\<for\>/For/gie
+    :%s///gie
+    :%s///gie
+endfunction " 1}}}
+" ILIST {{{1
+nnoremap <Leader>'fk :call SG_UnderFilterOccurences()<CR>
+nnoremap <Leader>'fp :call SG_PromptFilterOccurences()<CR>
+
+function! SG_UnderFilterOccurences()
+    let v:errmsg = ""
+    exe "normal [I"
+    if v:errmsg != ""
+        return
+    endif
+    let nr = input("Wybierz: ")
+    if nr == ""
+        return
+    endif
+    let v:errmsg = ""
+    exe "silent! normal " . nr . "[\t"
+    if v:errmsg != ""
+        echohl WarningMsg | echomsg "Nie bylo takiego numeru"  | echohl None
+    endif
+endfunction!
+function! SG_PromptFilterOccurences()
+    let pattern = input("Czego szukac: ")
+    if pattern == ""
+        return
+    endif
+    let v:errmsg = ""
+    exe "ilist " . pattern
+    if v:errmsg != ""
+        return
+    endif
+    let nr = input("Wybierz: ")
+    if nr == ""
+        return
+    endif
+    let v:errmsg = ""
+    exe "silent! ijump " . nr . pattern
+    if v:errmsg != ""
+        echohl WarningMsg | echomsg "Nie bylo takiego numeru"  | echohl None
+    endif
+endfunction
+" 1}}}
+
+" vim:ft=vim

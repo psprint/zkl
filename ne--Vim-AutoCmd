@@ -1,0 +1,29 @@
+" AUTOCMD {{{1
+if has("autocmd")
+    filetype plugin indent on
+    au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=markdown
+    autocmd BufRead *.txt setlocal tw=78
+    autocmd BufRead *.txt setlocal wrap
+    autocmd FileType text setlocal tw=78
+    autocmd FileType text setlocal wrap
+    "autocmd BufRead *.plist setlocal filetype:xml
+    "autocmd FileType cpp setlocal foldmethod=syntax
+    "autocmd FileType c setlocal foldmethod=syntax
+    "autocmd BufRead *.log set ft=marma
+    autocmd BufReadPost *
+    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+    \   exe "normal g'\"" |
+    \ endif
+endif " 1}}}
+" XXD {{{1
+augroup Binary
+    au!
+    au BufReadPre  *.bin let &bin=1
+    au BufReadPost *.bin if &bin | %!xxd
+    au BufReadPost *.bin set ft=xxd | endif
+    au BufWritePre *.bin if &bin | %!xxd -r
+    au BufWritePre *.bin endif
+    au BufWritePost *.bin if &bin | %!xxd
+    au BufWritePost *.bin set nomod | endif
+augroup END " 1}}}
+" vim:ft=vim

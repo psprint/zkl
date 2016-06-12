@@ -1,0 +1,14 @@
+" 256 colors {{{1
+if &term=="xterm" || &term=="rxvt"
+    set t_Co=256
+    set t_Sb=^[4%dm
+    set t_Sf=^[3%dm
+endif " 1}}}
+" SYNTAX ON {{{1
+if &t_Co > 2 || has("gui_running")
+    syntax on
+    set hlsearch
+    colorscheme delek
+    hi Special                      ctermfg=yellow guifg=Orange cterm=none gui=none
+endif " 1}}}
+" vim:ft=vim

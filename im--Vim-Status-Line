@@ -1,0 +1,55 @@
+ " Status line {{{1
+set laststatus=2
+
+if has('statusline')
+
+    " CALLBACK {{{2
+    function SetStatusLineStyle()
+        " Pobranie aktualnego czasu przed wyswietleniem
+        let l:tmptime = strftime("%H:%M")
+        let &stl="%f %y%([%R%M]%)%{'!'[&ff=='".&ff."']}%{'$'[!&list]}%{'~'[&pm=='']}\ %2*[#%02n]%*\ %2*[".l:tmptime."]%*\ char=0x%02B\,%03b\ %=%{SL_Options()}\ %18.(%l/%L\ %=%c%V%)"
+
+        call SetStatusLineColor()
+    endfunc " 2}}}
+    function SetStatusLineColor() " {{{2
+        " Doesn't actually work
+        if mode() == "i"
+            highlight StatusLine	ctermfg=White ctermbg=Blue cterm=NONE
+            highlight StatusLineNC	ctermfg=Gray ctermbg=Blue cterm=NONE
+        else
+            highlight StatusLine	ctermfg=White ctermbg=Black cterm=NONE
+            highlight StatusLineNC	ctermfg=White ctermbg=Black cterm=NONE
+        endif
+    endfunc " 2}}}
+    function! SL_Options() " {{{2
+        let opt=""
+        " autoindent
+        if &ai|   let opt=opt." ai"   |endif
+        "  expandtab
+        if &et|   let opt=opt." et"   |endif
+        "  hlsearch
+        if &hls|  let opt=opt." hls"  |endif
+        "  paste
+        if &paste|let opt=opt." paste"|endif
+        "  shiftwidth
+        if &shiftwidth!=8|let opt=opt." sw=".&shiftwidth|endif
+        "  textwidth - show always!
+        let opt=opt." tw=".&tw
+        return opt
+    endf " 2}}}
+
+    call SetStatusLineStyle()
+
+    if has('title')
+        set titlestring=%t%(\ [%R%M]%)
+    endif
+
+    " color for buffer number
+    hi User1 cterm=NONE    ctermfg=red    ctermbg=yellow guifg=red    guibg=white
+    " color for filename
+    hi User2 cterm=NONE    ctermfg=black  ctermbg=green  guifg=black  guibg=green
+    " color for position
+    hi User3 cterm=NONE    ctermfg=yellow ctermbg=darkmagenta guifg=yellow guibg=cyan
+endif  " 1}}}
+
+" vim:ft=vim
