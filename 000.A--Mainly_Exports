@@ -3,6 +3,8 @@ HISTSIZE=89000
 SAVEHIST=89000
 HISTFILE=~/.zhistory
 
+I am not harmful :)
+
 (( ABSD )) && {
     export LSCOLORS=dxfxcxdxbxegedabagacad CLICOLOR="1" 
     export ANDROID_ROOT=/opt/android
